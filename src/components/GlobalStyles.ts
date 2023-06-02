@@ -9,6 +9,7 @@ const GlobasStyle = createGlobalStyle`
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 

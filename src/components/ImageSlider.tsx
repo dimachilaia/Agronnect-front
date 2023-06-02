@@ -7,9 +7,9 @@ import styled from "styled-components";
 
 const ImageSlider = () => {
   const imageUrls = [
-    "https://placeimg.com/640/410/any",
-    "https://placeimg.com/640/420/any",
-    "https://placeimg.com/640/329/any",
+    "https://placeimg.com/640/123/any",
+    "https://placeimg.com/640/225/any",
+    "https://placeimg.com/640/423/any",
   ];
 
   return (
@@ -17,8 +17,8 @@ const ImageSlider = () => {
       spaceBetween={50}
       slidesPerView={1}
       modules={[Pagination, Autoplay]}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
       pagination={{ clickable: true }}
       autoplay={{ delay: 3000 }}
     >
@@ -35,6 +35,9 @@ export default ImageSlider;
 
 const CustomSwiper = styled(Swiper)`
   width: 100%;
+  height: 100vh;
+  /* position: sticky; */
+  /* top: 0; */
   .swiper-pagination-bullet {
     border-radius: 1px;
     width: 100px;
@@ -50,7 +53,7 @@ const CustomSwiper = styled(Swiper)`
 
   img {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: cover;
   }
 `;

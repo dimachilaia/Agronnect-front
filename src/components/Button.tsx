@@ -1,17 +1,18 @@
-import React from "react";
+import { ComponentProps, forwardRef } from "react";
 import styled from "styled-components";
 
-interface ButtonProps {
-  title?: string;
+interface Props extends ComponentProps<"button"> {
+  title: string;
 }
 
-const Button = ({ title }: ButtonProps) => {
+const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+  const { title, ...otherProps } = props;
   return (
-    <ButtonContainer>
+    <ButtonContainer {...otherProps} ref={ref}>
       <Title>{title}</Title>
     </ButtonContainer>
   );
-};
+});
 
 export default Button;
 

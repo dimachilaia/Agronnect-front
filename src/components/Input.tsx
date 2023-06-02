@@ -41,6 +41,5 @@ const CustomInput = styled.input`
   font-weight: 400;
   font-size: 20px;
   line-height: 23px;
-  text-transform: lowercase;
   color: #4f4f4f;
 `;

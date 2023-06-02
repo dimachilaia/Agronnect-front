@@ -1,34 +1,99 @@
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Input from "../components/Input";
 import styled from "styled-components";
 import ImageSlider from "../components/ImageSlider";
+import Button from "../components/Button";
+import axios from "axios";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useUser } from "../providers/user";
+import Cookies from "js-cookie";
 
+const types = ["specialist", "farmer"];
 export const Login = () => {
-  const [activeType, setActiveType] = useState<"specialist" | "farmer">(
-    "specialist"
-  );
+  const [activeType, setActiveType] = useState("specialist");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser, isLoggedIn } = useUser();
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
+
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("https://api.agronnect.dev/api/login", {
+        email,
+        password,
+      });
+      if (res.data.status === "success") {
+        const { token, user } = res.data;
+
+        Cookies.set("token", token);
+        setUser(user);
+      }
+    } catch (error: any) {
+      console.log(error);
+      setErrorMessage("Please provide correct mail and password to authorize");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
+    }
+  };
 
   return (
     <Container>
       <ImageSlider />
-      <FormContainer>
+      <FormContainer onSubmit={submit}>
         <Heading>Sign In Agronnect</Heading>
+        {errorMessage && (
+          <ErrorMessage>
+            {errorMessage} <XIcon onClick={() => setErrorMessage("")}>X</XIcon>
+          </ErrorMessage>
+        )}
         <Switcher>
-          <SwitcherItem
-            $isActive={activeType === "specialist"}
-            onClick={() => setActiveType("specialist")}
-          >
-            Specialist
-          </SwitcherItem>
-          <SwitcherItem
-            $isActive={activeType === "farmer"}
-            onClick={() => setActiveType("farmer")}
-          >
-            Farmer
-          </SwitcherItem>
+          {types.map((type) => {
+            return (
+              <SwitcherItem
+                key={type}
+                $isActive={activeType === type}
+                onClick={() => setActiveType(type)}
+              >
+                {type}
+              </SwitcherItem>
+            );
+          })}
         </Switcher>
-        <Input label="Email" type="email" required />
-        <button type="submit">Submit</button>
+        <InputsContainer>
+          <Input
+            label="email"
+            type="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            label="password"
+            type="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </InputsContainer>
+        <BottomContainer>
+          <Link self to="#">
+            Forgot Your Password?
+          </Link>
+          <Button type="submit" title="SIGN IN" />
+          <span>
+            Don’t have an account?{" "}
+            <Link to="/register" state={{ type: activeType }}>
+              Create One.
+            </Link>
+          </span>
+        </BottomContainer>
       </FormContainer>
     </Container>
   );
@@ -42,7 +107,7 @@ const Container = styled.section`
   overflow-x: hidden;
 `;
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   max-width: 500px;
   width: 100%;
   height: 100%;
@@ -72,6 +137,12 @@ const Switcher = styled.div`
     #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 40px;
+  padding: 8px;
+  gap: 4px;
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const SwitcherItem = styled.div<{ $isActive: boolean }>`
@@ -83,4 +154,50 @@ const SwitcherItem = styled.div<{ $isActive: boolean }>`
   line-height: 28px;
   text-align: center;
   text-transform: capitalize;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 14px;
+  user-select: none;
+`;
+
+const InputsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+`;
+
+const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+`;
+
+const Link = styled(RouterLink)<{ self?: boolean }>`
+  align-self: ${({ self }) => (self ? "end" : "unset")};
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2596ff;
+  text-decoration: none;
+`;
+const ErrorMessage = styled.span`
+  background: red;
+  color: white;
+  padding: 12px 34px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+`;
+
+const XIcon = styled.span`
+  top: 10px;
+  right: 12px;
+  position: absolute;
+  cursor: pointer;
+  font-weight: bold;
 `;
