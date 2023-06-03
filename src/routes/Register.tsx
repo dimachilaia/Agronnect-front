@@ -197,7 +197,6 @@ const Container = styled.section`
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 20px;
-    /* padding: 20px; */
   }
 `;
 
@@ -214,13 +213,11 @@ const FormContainer = styled.form`
   padding: 85px 0;
   @media screen and (max-width: 1024px) {
     background: #ffffff;
-    height: 120vh;
     transform: translateY(-50px);
     position: relative;
     z-index: 5;
-    width: 100%;
     max-width: unset;
-    padding: 0 50px;
+    padding: 45px 50px;
     box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
     gap: 20px;

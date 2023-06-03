@@ -129,16 +129,15 @@ const FormContainer = styled.form`
   align-items: center;
   justify-content: center;
   gap: 50px;
+
   @media screen and (max-width: 1024px) {
     background: #ffffff;
     transform: translateY(-50px);
     position: relative;
     z-index: 5;
-    height: 625px;
     width: 100%;
     max-width: unset;
-    padding: 0 50px;
-
+    padding: 51px 50px;
     box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
     gap: 20px;
@@ -173,9 +172,6 @@ const Switcher = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    width: 80%;
-  }
 `;
 
 const SwitcherItem = styled.div<{ $isActive: boolean }>`
