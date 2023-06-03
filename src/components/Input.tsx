@@ -24,6 +24,7 @@ const InputContainer = styled.label`
   padding: 12px 32px;
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 5px;
 `;
 
@@ -31,6 +32,7 @@ const Label = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+  width: 100%;
   text-transform: capitalize;
   color: rgba(79, 79, 79, 0.5);
 `;
@@ -39,6 +41,7 @@ const CustomInput = styled.input`
   border: 0;
   outline: 0;
   font-weight: 400;
+  width: 100%;
   font-size: 20px;
   line-height: 23px;
   color: #4f4f4f;

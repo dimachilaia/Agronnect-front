@@ -16,8 +16,6 @@ export default function Router() {
             <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dima" element={<Button title="Dima" />} />
-            <Route path="/image" element={<ImageContainer />} />
           </Routes>
         </BrowserRouter>
       </UserProvider>

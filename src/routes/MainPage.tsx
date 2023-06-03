@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../components/Input";
-import { useUser } from "../providers/user";
-import styled from "styled-components";
-import Button from "../components/Button";
-import Cookies from "js-cookie";
 import { useEffect } from "react";
+import styled from "styled-components";
+import Cookies from "js-cookie";
+import { useUser } from "../providers/user";
+
+import Input from "../components/Input";
+import Button from "../components/Button";
 
 export const MainPage = () => {
   const { user, isLoggedIn, setUser } = useUser();
@@ -25,9 +26,9 @@ export const MainPage = () => {
     <Container>
       {isLoggedIn ? (
         <>
-          <h1>
-            User is logged in: {user?.name} {user?.last_name}
-          </h1>
+          <WelcomeMessage>
+            Hello, {user?.name} {user?.last_name}
+          </WelcomeMessage>
           <Button title="LOG OUT" onClick={logOutHandler} />
         </>
       ) : (
@@ -37,4 +38,19 @@ export const MainPage = () => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+const WelcomeMessage = styled.h1`
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 20px;
+`;

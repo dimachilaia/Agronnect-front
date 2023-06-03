@@ -116,7 +116,6 @@ const Container = styled.section`
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 20px;
-    padding: 20px;
   }
 `;
 
@@ -132,7 +131,14 @@ const FormContainer = styled.form`
   gap: 50px;
   @media screen and (max-width: 1024px) {
     background: #ffffff;
+    transform: translateY(-50px);
+    position: relative;
+    z-index: 5;
     height: 625px;
+    width: 100%;
+    max-width: unset;
+    padding: 0 50px;
+
     box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
     gap: 20px;
@@ -200,9 +206,6 @@ const InputsContainer = styled.div`
   flex-direction: column;
   gap: 25px;
   width: 100%;
-  @media screen and (max-width: 768px) {
-    width: 80%;
-  }
 `;
 
 const BottomContainer = styled.div`

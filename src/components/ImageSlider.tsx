@@ -36,19 +36,21 @@ const CustomSwiper = styled(Swiper)`
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  /* height: 100vh; */
-  /* position: sticky; */
-  /* top: 0; */
+  @media screen and (max-width: 1024px) {
+    height: 60vh;
+  }
+  @media screen and (max-width: 768px) {
+    height: 35vh;
+  }
   .swiper-pagination-bullet {
     border-radius: 1px;
     width: 100px;
     height: 7px;
-    left: 508px;
-    top: 929px;
+
     background: #f5efe9;
     border-radius: 1px;
     @media screen and (max-width: 768px) {
-      width: 70px;
+      width: 50px;
       height: 5px;
     }
   }
@@ -60,13 +62,13 @@ const CustomSwiper = styled(Swiper)`
     width: 100%;
     height: 100vh;
     object-fit: cover;
-    @media screen and (max-width: 768px) {
-      width: 500px;
-      height: 100vh;
+    @media screen and (max-width: 1024px) {
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
-      margin: 0 auto;
-      border-radius: 5px;
+      align-items: center;
     }
   }
 `;

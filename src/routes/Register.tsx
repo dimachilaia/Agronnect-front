@@ -8,6 +8,7 @@ import axios from "axios";
 import Button from "../components/Button";
 import Cookies from "js-cookie";
 import { useUser } from "../providers/user";
+import Loading from "../components/Loading/Loading";
 
 interface ICountry {
   id: number;
@@ -38,12 +39,13 @@ const Register = () => {
   const [countryValue, setCountryValue] = useState<Option | null>(null);
   const [zoneValue, setZoneValue] = useState<Option | null>(null);
   const { setUser, isLoggedIn } = useUser();
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate("/login");
     }
   }, [isLoggedIn]);
 
@@ -82,12 +84,16 @@ const Register = () => {
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (password !== repeatPassword) {
-    //   setErrorMessage("Passwords don't match!");
-    //   return;
-    // }
+    if (password !== repeatPassword) {
+      if (password !== "" && repeatPassword !== "") {
+        setErrorMessage("Passwords don't match!");
+        return;
+      }
+    }
 
     try {
+      setIsLoading(true);
+
       const res = await axios.post("https://api.agronnect.dev/api/register", {
         name,
         last_name: lastName,
@@ -106,6 +112,7 @@ const Register = () => {
         setUser(user);
       }
     } catch (e: any) {
+      setIsLoading(false);
       console.log(e);
       setErrorMessage(e.response.data.message);
       setTimeout(() => {
@@ -132,6 +139,7 @@ const Register = () => {
             </ErrorMessage>
           )}
         </HeadingInfo>
+        {isLoading && <Loading />}{" "}
         <InputContainer>
           <Input
             label="First Name"
@@ -189,7 +197,7 @@ const Container = styled.section`
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 20px;
-    padding: 20px;
+    /* padding: 20px; */
   }
 `;
 
@@ -204,6 +212,19 @@ const FormContainer = styled.form`
   gap: 50px;
   max-width: 500px;
   padding: 85px 0;
+  @media screen and (max-width: 1024px) {
+    background: #ffffff;
+    height: 120vh;
+    transform: translateY(-50px);
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: unset;
+    padding: 0 50px;
+    box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    gap: 20px;
+  }
 `;
 
 const HeadingInfo = styled.div`
@@ -219,6 +240,10 @@ const Heading = styled.h1`
   text-align: center;
   color: #000000;
   margin-bottom: 25px;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
 
   span {
     text-transform: capitalize;
@@ -233,13 +258,16 @@ const InputContainer = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
   line-height: 150.19%;
   text-align: center;
   color: #000000;
+  @media screen and (max-width: 768px) {
+    font-size: 17px;
+    line-height: 16px;
+  }
 `;
 
 const ErrorMessage = styled.span`
