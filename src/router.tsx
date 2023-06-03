@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import Button from "./components/Button";
 import ImageContainer from "./components/ImageSlider";
 import { Login, MainPage } from "./routes";
@@ -11,13 +11,13 @@ export default function Router() {
     <>
       <UserProvider>
         <GlobasStyle />
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </UserProvider>
     </>
   );
