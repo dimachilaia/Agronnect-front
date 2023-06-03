@@ -108,6 +108,9 @@ const Register = () => {
     } catch (e: any) {
       console.log(e);
       setErrorMessage(e.response.data.message);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2500);
     }
   };
 

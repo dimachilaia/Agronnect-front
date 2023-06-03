@@ -28,7 +28,7 @@ export const Login = () => {
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      setIsLoading(true); // Set loading state to true before making the request
+      setIsLoading(true);
       const res = await axios.post("https://api.agronnect.dev/api/login", {
         email,
         password,
@@ -40,7 +40,7 @@ export const Login = () => {
         setUser(user);
       }
     } catch (error: any) {
-      setIsLoading(false); // Set loading state to false on error
+      setIsLoading(false);
       console.log(error);
       setErrorMessage("Please provide correct mail and password to authorize");
       setTimeout(() => {

@@ -18,8 +18,6 @@ const ImageSlider = () => {
       spaceBetween={50}
       slidesPerView={1}
       modules={[Pagination, Autoplay]}
-      // onSlideChange={() => console.log("slide change")}
-      // onSwiper={(swiper) => console.log(swiper)}
       pagination={{ clickable: true }}
       autoplay={{ delay: 3000 }}
     >
@@ -35,7 +33,6 @@ const ImageSlider = () => {
 export default ImageSlider;
 
 const CustomSwiper = styled(Swiper)`
-  /* width: 100%; */
   width: 100%;
   height: 100vh;
   object-fit: cover;
@@ -50,6 +47,10 @@ const CustomSwiper = styled(Swiper)`
     top: 929px;
     background: #f5efe9;
     border-radius: 1px;
+    @media screen and (max-width: 768px) {
+      width: 70px;
+      height: 5px;
+    }
   }
   .swiper-pagination-bullet-active {
     background: #00ab89;
@@ -59,5 +60,13 @@ const CustomSwiper = styled(Swiper)`
     width: 100%;
     height: 100vh;
     object-fit: cover;
+    @media screen and (max-width: 768px) {
+      width: 500px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      border-radius: 5px;
+    }
   }
 `;
