@@ -182,6 +182,12 @@ const Container = styled.section`
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    padding: 20px;
+  }
 `;
 
 const FormContainer = styled.form`
@@ -236,9 +242,10 @@ const Paragraph = styled.p`
 const ErrorMessage = styled.span`
   background: red;
   color: white;
-  padding: 12px 24px;
+  padding: 12px 34px;
   border-radius: 8px;
-  text-align: center;
+  font-size: 20px;
+  height: 100px;
   position: relative;
 `;
 

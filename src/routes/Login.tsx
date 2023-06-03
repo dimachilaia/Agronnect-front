@@ -7,6 +7,7 @@ import axios from "axios";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useUser } from "../providers/user";
 import Cookies from "js-cookie";
+import Loading from "../components/Loading/Loading";
 
 const types = ["specialist", "farmer"];
 export const Login = () => {
@@ -16,6 +17,7 @@ export const Login = () => {
   const { setUser, isLoggedIn } = useUser();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -26,6 +28,7 @@ export const Login = () => {
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true); // Set loading state to true before making the request
       const res = await axios.post("https://api.agronnect.dev/api/login", {
         email,
         password,
@@ -37,6 +40,7 @@ export const Login = () => {
         setUser(user);
       }
     } catch (error: any) {
+      setIsLoading(false); // Set loading state to false on error
       console.log(error);
       setErrorMessage("Please provide correct mail and password to authorize");
       setTimeout(() => {
@@ -94,6 +98,7 @@ export const Login = () => {
             </Link>
           </span>
         </BottomContainer>
+        {isLoading && <Loading />}{" "}
       </FormContainer>
     </Container>
   );
@@ -105,6 +110,14 @@ const Container = styled.section`
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  width: 100%;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+    padding: 20px;
+  }
 `;
 
 const FormContainer = styled.form`
@@ -117,6 +130,13 @@ const FormContainer = styled.form`
   align-items: center;
   justify-content: center;
   gap: 50px;
+  @media screen and (max-width: 1024px) {
+    background: #ffffff;
+    height: 625px;
+    box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    gap: 20px;
+  }
 `;
 
 const Heading = styled.h1`
@@ -125,6 +145,10 @@ const Heading = styled.h1`
   line-height: 56px;
   text-align: center;
   color: #000000;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
 `;
 
 const Switcher = styled.div`
@@ -143,6 +167,9 @@ const Switcher = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const SwitcherItem = styled.div<{ $isActive: boolean }>`
@@ -160,6 +187,12 @@ const SwitcherItem = styled.div<{ $isActive: boolean }>`
   cursor: pointer;
   padding: 14px;
   user-select: none;
+  @media screen and (max-width: 768px) {
+    font-family: "Roboto";
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+  }
 `;
 
 const InputsContainer = styled.div`
@@ -167,6 +200,9 @@ const InputsContainer = styled.div`
   flex-direction: column;
   gap: 25px;
   width: 100%;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const BottomContainer = styled.div`
@@ -190,7 +226,8 @@ const ErrorMessage = styled.span`
   color: white;
   padding: 12px 34px;
   border-radius: 8px;
-  text-align: center;
+  font-size: 20px;
+  height: 100px;
   position: relative;
 `;
 

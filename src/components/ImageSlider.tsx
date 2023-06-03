@@ -7,9 +7,10 @@ import styled from "styled-components";
 
 const ImageSlider = () => {
   const imageUrls = [
-    "https://placeimg.com/640/123/any",
-    "https://placeimg.com/640/225/any",
-    "https://placeimg.com/640/423/any",
+    "https://static.bb.ge/static/media/Bm2IHGmkw61HaxrEXP04iEN3Jv6ASACTThD8gDBz.jpeg",
+    "https://www.foxerp.com/wp-content/uploads/2023/01/Fox-ERP-Thriving-Agrotech-in-the-new-normal-with-GPS-Technology-scaled.jpg",
+    "https://unctad.org/sites/default/files/2020-12/2020-12-24_Agritech-and-gender_1200x675.jpg",
+    "https://agrotekplus.com/static/img/defaultimages/sliders/agrotechmum.png",
   ];
 
   return (
@@ -34,8 +35,11 @@ const ImageSlider = () => {
 export default ImageSlider;
 
 const CustomSwiper = styled(Swiper)`
+  /* width: 100%; */
   width: 100%;
   height: 100vh;
+  object-fit: cover;
+  /* height: 100vh; */
   /* position: sticky; */
   /* top: 0; */
   .swiper-pagination-bullet {
