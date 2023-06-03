@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Agronnect-front/static/css/main.1088a3d3.css",
-    "main.js": "/Agronnect-front/static/js/main.daa08379.js",
+    "main.js": "/Agronnect-front/static/js/main.1eaaba29.js",
     "index.html": "/Agronnect-front/index.html",
     "main.1088a3d3.css.map": "/Agronnect-front/static/css/main.1088a3d3.css.map",
-    "main.daa08379.js.map": "/Agronnect-front/static/js/main.daa08379.js.map"
+    "main.1eaaba29.js.map": "/Agronnect-front/static/js/main.1eaaba29.js.map"
   },
   "entrypoints": [
     "static/css/main.1088a3d3.css",
-    "static/js/main.daa08379.js"
+    "static/js/main.1eaaba29.js"
   ]
 }
