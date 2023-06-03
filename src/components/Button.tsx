@@ -30,7 +30,6 @@ const ButtonContainer = styled.button`
     opacity: 0.9;
   }
 `;
-
 const Title = styled.span`
   color: #ffffff;
   font-family: "Roboto";
