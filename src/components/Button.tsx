@@ -24,8 +24,10 @@ const ButtonContainer = styled.button`
   padding: 20px 0;
   width: 100%;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
-    width: 80%;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
   }
 `;
 
@@ -37,6 +39,7 @@ const Title = styled.span`
   line-height: 28px;
   text-align: center;
   text-transform: uppercase;
+
   @media screen and (max-width: 768px) {
     font-size: 16px;
     line-height: 19px;
