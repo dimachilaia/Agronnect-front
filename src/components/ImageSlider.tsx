@@ -36,6 +36,8 @@ const CustomSwiper = styled(Swiper)`
   width: 100%;
   height: 100vh;
   object-fit: cover;
+  position: sticky;
+  top: 0;
   @media screen and (max-width: 1024px) {
     height: 60vh;
   }
